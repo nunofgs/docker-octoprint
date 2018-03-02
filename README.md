@@ -1,6 +1,9 @@
-# OctoPrint for Raspberry Pi 2
+# OctoPrint
 
-This is a Dockerfile to set up [OctoPrint](http://octoprint.org/).
+This is a Dockerfile to set up [OctoPrint](http://octoprint.org/). It supports the following architectures automatically:
+
+- x86
+- arm32v6 (Raspberry Pi, etc.)
 
 # Usage
 
@@ -9,18 +12,14 @@ $ docker run \
   --device=/dev/video0 \
   -p 80:80 \
   -v /mnt/data:/data \
-  nunofgs/rpi-octoprint
+  nunofgs/octoprint
 ```
 
 # CuraEngine integration
 
-CuraEngine is installed under:
+Cura engine integration was very outdated (using version `15.04.6`) and was removed.
 
-```
-/CuraEngine/CuraEngine
-```
-
-Please set it in the settings menu if you intend to use it.
+It will return once OctoPrint [supports python3](https://github.com/foosel/OctoPrint/pull/1416#issuecomment-371878648) (needed for the newest versions of cura engine).
 
 # Webcam integration
 
@@ -32,7 +31,7 @@ Please set it in the settings menu if you intend to use it.
 webcam:
   stream: /webcam/?action=stream
   snapshot: http://127.0.0.1:8080/?action=snapshot
-  ffmpeg: /usr/bin/avconv
+  ffmpeg: /usr/bin/ffmpeg
 ```
 
 # Notes
@@ -56,4 +55,4 @@ system:
 
 # Credits
 
-All credits go to https://bitbucket.org/a2z-team/docker-octoprint. I simply ported this to the raspberry pi 2.
+Original credits go to https://bitbucket.org/a2z-team/docker-octoprint. I initially ported this to the raspberry pi 2 and later moved to a multiarch image.
