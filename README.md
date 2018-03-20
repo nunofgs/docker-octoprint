@@ -1,9 +1,16 @@
 # OctoPrint
 
+[![build status][travis-image]][travis-url]
+
 This is a Dockerfile to set up [OctoPrint](http://octoprint.org/). It supports the following architectures automatically:
 
 - x86
 - arm32v6 (Raspberry Pi, etc.)
+
+# Tags
+
+- `1.3.6`, `latest` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
+- `master` (_Automatically built daily from OctoPrint's `master` branch_)
 
 # Usage
 
@@ -56,3 +63,10 @@ system:
 # Credits
 
 Original credits go to https://bitbucket.org/a2z-team/docker-octoprint. I initially ported this to the raspberry pi 2 and later moved to a multiarch image.
+
+## License
+
+MIT
+
+[travis-image]: https://img.shields.io/travis/nunofgs/docker-octoprint.svg?style=flat-square
+[travis-url]: https://travis-ci.org/nunofgs/docker-octoprint
