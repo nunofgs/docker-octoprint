@@ -8,7 +8,7 @@ language: bash
 env:
   matrix:
     - ARCH=amd64
-    - ARCH=arm32v6
+    - ARCH=arm32v7
 
 stages:
   - name: test
@@ -28,10 +28,10 @@ jobs:
       script:
         - docker login -u=nunofgs -p="$DOCKER_PASSWORD"
         - docker pull "nunofgs/octoprint:$TRAVIS_BRANCH-amd64"
-        - docker pull "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v6"
+        - docker pull "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7"
         - >
-          docker manifest create "nunofgs/octoprint:$TRAVIS_BRANCH" "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v6" &&
-          docker manifest annotate "nunofgs/octoprint:$TRAVIS_BRANCH" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v6" --os linux --arch arm --variant v6 &&
+          docker manifest create "nunofgs/octoprint:$TRAVIS_BRANCH" "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" &&
+          docker manifest annotate "nunofgs/octoprint:$TRAVIS_BRANCH" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" --os linux --arch arm --variant v6 &&
           docker manifest push "nunofgs/octoprint:$TRAVIS_BRANCH"
         - >
           if [ -n "$TRAVIS_TAG" ]; then
@@ -40,7 +40,7 @@ jobs:
           fi
         - >
           if [ -n "$TRAVIS_TAG" ]; then
-            docker manifest create "nunofgs/octoprint:latest" "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v6" &&
-            docker manifest annotate "nunofgs/octoprint:latest" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v6" --os linux --arch arm --variant v6 &&
+            docker manifest create "nunofgs/octoprint:latest" "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" &&
+            docker manifest annotate "nunofgs/octoprint:latest" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" --os linux --arch arm --variant v6 &&
             docker manifest push "nunofgs/octoprint:latest"
           fi
