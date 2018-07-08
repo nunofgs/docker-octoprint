@@ -26,7 +26,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   unzip \
   wget \
   zlib1g-dev
-RUN pip install sarge==0.1.4
+
+# Temporary workarounds that are fixed in Octoprint 1.3.9
+RUN pip install pip==9.0.3 sarge==0.1.4
 
 # Download packages
 RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${version}.tar.gz | tar xz
