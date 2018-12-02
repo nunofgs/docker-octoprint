@@ -49,7 +49,7 @@ COPY pip.conf /root/.pip/pip.conf
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 ENV CAMERA_DEV /dev/video0
-ENV STREAMER_FLAGS -y -n
+ENV STREAMER_FLAGS -y -n -r 640x480
 
 EXPOSE 80
 

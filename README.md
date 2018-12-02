@@ -25,6 +25,13 @@ $ docker run \
   nunofgs/octoprint
 ```
 
+# Environment Variables
+
+| Variable                 | Description                    | Default Value      |
+| ------------------------ | ------------------------------ | ------------------ |
+| CAMERA_DEV               | The camera device node         | `/dev/video0`      |
+| STREAMER_FLAGS           | Flags to pass to mjpg_streamer | `-y -n -r 640x480` |
+
 # CuraEngine integration
 
 Cura engine integration was very outdated (using version `15.04.6`) and was removed.
@@ -34,7 +41,7 @@ It will return once OctoPrint [supports python3](https://github.com/foosel/OctoP
 # Webcam integration
 
 1. Bind the camera to the docker using --device=/dev/video0:/dev/videoX
-2. If camera supports only MJPEG formatting, please set STREAMER_FLAGS to "" or something else.
+2. Optionally, change `STREAMER_FLAGS` to your preferred settings (ex: `-y -n -r 1280x720 -f 10`)
 3. Use the following settings in octoprint:
 
 ```yaml
