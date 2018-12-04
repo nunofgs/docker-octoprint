@@ -15,6 +15,14 @@ This is a Dockerfile to set up [OctoPrint](http://octoprint.org/). It supports t
 - `1.3.6` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
 - `master` (_Automatically built daily from OctoPrint's `master` branch_)
 
+# Tested devices
+
+| Device              | Working? |
+| ------------------- | -------- |
+| Raspberry Pi 2b     | ✅        |
+| Raspberry Pi 3b+    | ✅        |
+| Raspberry Pi Zero W | ❌        |
+
 # Usage
 
 ```shell
