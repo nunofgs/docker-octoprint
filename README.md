@@ -9,7 +9,8 @@ This is a Dockerfile to set up [OctoPrint](http://octoprint.org/). It supports t
 
 # Tags
 
-- `1.3.9`, `latest` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
+- `1.3.10`, `latest` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
+- `1.3.9` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
 - `1.3.8` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
 - `1.3.7` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
 - `1.3.6` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/Dockerfile))
