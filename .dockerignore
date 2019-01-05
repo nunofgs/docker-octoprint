@@ -1,5 +1,4 @@
 *
 !Dockerfile
 !haproxy.cfg
-!pip.conf
 !supervisord.conf
