@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libjpeg62-turbo \
   libprotobuf-dev \
   libv4l-dev \
+  openssh-client \
   psmisc \
   supervisor \
   unzip \
