@@ -13,10 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   avrdude \
   build-essential \
   cmake \
+  ffmpeg \
   git \
   haproxy \
   imagemagick \
-  libav-tools \
   v4l-utils \
   libjpeg-dev \
   libjpeg62-turbo \
