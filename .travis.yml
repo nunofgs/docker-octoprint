@@ -1,14 +1,18 @@
 before_install:
-  - sudo apt-get install docker-ce=18.02.0~ce-0~ubuntu
-  - mkdir ~/.docker && echo '{ "experimental":"enabled" }' > ~/.docker/config.json
+  - curl -sf https://test.docker.com | sh
   - docker --version
+
+dist: bionic
 
 language: bash
 
 env:
+  global:
+    - DOCKER_CLI_EXPERIMENTAL=enabled
+    - PLATFORMS=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
   matrix:
-    - ARCH=amd64
-    - ARCH=arm32v7
+    - VARIANT=alpine
+    - VARIANT=debian
 
 stages:
   - name: test
@@ -17,30 +21,16 @@ stages:
     if: tag IS present OR branch = master
 
 script:
-  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - docker build -t "nunofgs/octoprint:$TRAVIS_BRANCH-$ARCH" --build-arg "arch=$ARCH" --build-arg "version=$TRAVIS_BRANCH" .
-  - docker login -u=nunofgs -p="$DOCKER_PASSWORD"
-  - docker push "nunofgs/octoprint:$TRAVIS_BRANCH-$ARCH"
-
-jobs:
-  include:
-    - stage: push
-      script:
-        - docker login -u=nunofgs -p="$DOCKER_PASSWORD"
-        - docker pull "nunofgs/octoprint:$TRAVIS_BRANCH-amd64"
-        - docker pull "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7"
-        - >
-          docker manifest create "nunofgs/octoprint:$TRAVIS_BRANCH" "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" &&
-          docker manifest annotate "nunofgs/octoprint:$TRAVIS_BRANCH" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" --os linux --arch arm --variant v6 &&
-          docker manifest push "nunofgs/octoprint:$TRAVIS_BRANCH"
-        - >
-          if [ -n "$TRAVIS_TAG" ]; then
-            docker tag "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" nunofgs/octoprint:latest &&
-            docker push nunofgs/octoprint:latest
-          fi
-        - >
-          if [ -n "$TRAVIS_TAG" ]; then
-            docker manifest create "nunofgs/octoprint:latest" "nunofgs/octoprint:$TRAVIS_BRANCH-amd64" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" &&
-            docker manifest annotate "nunofgs/octoprint:latest" "nunofgs/octoprint:$TRAVIS_BRANCH-arm32v7" --os linux --arch arm --variant v6 &&
-            docker manifest push "nunofgs/octoprint:latest"
-          fi
+  - echo "$DOCKER_PASSWORD" | docker login -u nunofgs --password-stdin
+  - docker run --privileged linuxkit/binfmt:v0.7
+  - docker buildx create --use
+  - docker buildx build
+    --platform $PLATFORMS
+    --build-arg "version=$TRAVIS_BRANCH"
+    --file "$VARIANT/Dockerfile"
+    --tag nunofgs/octoprint:$TRAVIS_BRANCH-$VARIANT
+    `if [ -n "$TRAVIS_TAG" ]; then echo "--tag nunofgs/octoprint:$VARIANT"; fi`
+    `if [ -n "$TRAVIS_TAG" ] && [ "$VARIANT" = "debian" ]; then echo "--tag nunofgs/octoprint:latest"; fi`
+    `if [ "$VARIANT" = "debian" ]; then echo "--tag nunofgs/octoprint:$TRAVIS_BRANCH"; fi`
+    --push
+    .

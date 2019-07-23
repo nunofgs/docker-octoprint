@@ -1,10 +1,7 @@
 ARG arch
 
-# Intermediate build container with arm support.
-FROM hypriot/qemu-register as qemu
-FROM $arch/python:2.7-slim as build
-
-COPY --from=qemu /qemu-arm /usr/bin/qemu-arm-static
+# Intermediate build container.
+FROM python:2.7-slim as build
 
 ARG version
 
