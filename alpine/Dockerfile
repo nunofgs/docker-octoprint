@@ -1,5 +1,3 @@
-ARG arch
-
 # Intermediate build container.
 FROM python:2.7-alpine3.10 as build
 
@@ -25,6 +23,7 @@ WORKDIR /OctoPrint-${version}
 RUN pip install -r requirements.txt
 RUN python setup.py install
 
+# Build final image
 FROM python:2.7-alpine3.10
 
 COPY --from=build /usr/local/bin /usr/local/bin

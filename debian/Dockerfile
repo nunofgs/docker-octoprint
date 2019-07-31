@@ -1,7 +1,4 @@
-ARG arch
-
-# Intermediate build container.
-FROM python:2.7-slim as build
+FROM python:2.7-slim
 
 ARG version
 
