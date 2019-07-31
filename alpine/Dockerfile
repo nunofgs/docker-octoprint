@@ -32,8 +32,7 @@ COPY --from=build /usr/local/lib /usr/local/lib
 COPY --from=build /mjpg-streamer-*/mjpg-streamer-experimental /opt/mjpg-streamer
 COPY --from=build /OctoPrint-* /opt/octoprint
 
-RUN apk --no-cache add build-base ffmpeg haproxy libjpeg openssh-client v4l-utils && \
-  pip install supervisor
+RUN apk --no-cache add build-base ffmpeg haproxy libjpeg openssh-client supervisor v4l-utils
 
 VOLUME /data
 WORKDIR /data
@@ -50,4 +49,4 @@ ENV PYTHONUSERBASE /data/plugins
 
 EXPOSE 80
 
-CMD ["/usr/local/bin/python", "/usr/local/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
