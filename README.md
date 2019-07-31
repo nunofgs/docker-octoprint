@@ -55,7 +55,7 @@ $ docker run \
 | ------------------------ | ------------------------------ | ------------------ |
 | CAMERA_DEV               | The camera device node         | `/dev/video0`      |
 | MJPEG_STREAMER_AUTOSTART | Start the camera automatically | `true`             |
-| STREAMER_FLAGS           | Flags to pass to mjpg_streamer | `-y -n -r 640x480` |
+| MJPEG_STREAMER_INPUT     | Flags to pass to mjpg_streamer | `-y -n -r 640x480` |
 
 # CuraEngine integration
 

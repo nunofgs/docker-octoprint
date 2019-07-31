@@ -1,4 +1,5 @@
 *
+!bin/
 !Dockerfile
 !haproxy.cfg
 !supervisord.conf

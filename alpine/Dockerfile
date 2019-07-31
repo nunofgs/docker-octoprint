@@ -38,14 +38,15 @@ RUN apk --no-cache add build-base ffmpeg haproxy libjpeg openssh-client v4l-util
 VOLUME /data
 WORKDIR /data
 
+COPY bin/* /usr/local/bin
 COPY haproxy.cfg /etc/haproxy/haproxy.cfg
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 ENV CAMERA_DEV /dev/video0
 ENV MJPEG_STREAMER_AUTOSTART true
+ENV MJPEG_STREAMER_INPUT -y -n -r 640x480
 ENV PIP_USER true
 ENV PYTHONUSERBASE /data/plugins
-ENV STREAMER_FLAGS -y -n -r 640x480
 
 EXPOSE 80
 
