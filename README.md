@@ -74,8 +74,10 @@ It will return once OctoPrint [supports python3](https://github.com/foosel/OctoP
 
 1. The camera module must be activated (sudo raspi-config -> interfacing -> Camera -> set it to YES)
 2. Memory split must be at least 128mb, 256mb recommended. (sudo raspi-config -> Advanced Options -> Memory Split -> set it to 128 or 256)
-3. You must allow acess to device: /dev/vchiq
+3. You must allow access to device: /dev/vchiq
 4. Change `MJPEG_STREAMER_INPUT` to use input_raspicam.so (ex: `input_raspicam.so -fps 25`)
+
+<sup>* Raspberry PI camera support is only available in `arm/v6` and `arm/v7` builds at the moment.</sup>
 
 ## Octoprint configuration
 

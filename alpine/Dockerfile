@@ -37,9 +37,9 @@ RUN apk --no-cache add build-base ffmpeg haproxy libjpeg openssh-client supervis
 VOLUME /data
 WORKDIR /data
 
-COPY bin/* /usr/local/bin
 COPY haproxy.cfg /etc/haproxy/haproxy.cfg
 COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY start-mjpg-streamer /usr/local/bin/start-mjpg-streamer
 
 ENV CAMERA_DEV /dev/video0
 ENV MJPEG_STREAMER_AUTOSTART true
