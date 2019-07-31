@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   zlib1g-dev
 
+RUN apt-get install -y libraspberrypi-dev || true
+
 # Download packages
 RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${version}.tar.gz | tar xz
 RUN wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz
