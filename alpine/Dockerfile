@@ -1,17 +1,18 @@
 # Intermediate build container.
 FROM python:2.7-alpine3.10 as build
 
-ARG version
+ARG TARGETPLATFORM
+ARG VERSION
 
 RUN apk --no-cache add build-base
 RUN apk --no-cache add cmake
 RUN apk --no-cache add libjpeg-turbo-dev
 RUN apk --no-cache add linux-headers
 RUN apk --no-cache add openssl
-RUN apk --no-cache add raspberrypi-dev || true
+RUN [[ "${TARGETPLATFORM:6}" != "arm64" ]] && apk --no-cache add raspberrypi-dev || true
 
 # Download packages
-RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${version}.tar.gz | tar xz
+RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${VERSION}.tar.gz | tar xz
 RUN wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz
 
 # Install mjpg-streamer
@@ -20,7 +21,7 @@ RUN make
 RUN make install
 
 # Install OctoPrint
-WORKDIR /OctoPrint-${version}
+WORKDIR /OctoPrint-${VERSION}
 RUN pip install -r requirements.txt
 RUN python setup.py install
 

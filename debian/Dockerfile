@@ -1,6 +1,7 @@
 FROM python:2.7-slim
 
-ARG version
+ARG TARGETPLATFORM
+ARG VERSION
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -24,10 +25,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   zlib1g-dev
 
-RUN apt-get install -y libraspberrypi-dev || true
+RUN [[ "${TARGETPLATFORM:6}" != "arm64" ]] && apt-get install -y libraspberrypi-dev || true
 
 # Download packages
-RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${version}.tar.gz | tar xz
+RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${VERSION}.tar.gz | tar xz
 RUN wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz
 
 # Install mjpg-streamer
@@ -36,7 +37,7 @@ RUN make
 RUN make install
 
 # Install OctoPrint
-WORKDIR /OctoPrint-${version}
+WORKDIR /OctoPrint-${VERSION}
 RUN pip install -r requirements.txt
 RUN python setup.py install
 
