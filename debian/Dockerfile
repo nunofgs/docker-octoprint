@@ -3,6 +3,8 @@ FROM python:2.7-slim
 ARG TARGETPLATFORM
 ARG VERSION
 
+SHELL ["/bin/bash", "-c"]
+
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
   avrdude \
