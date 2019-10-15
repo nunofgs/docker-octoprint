@@ -42,6 +42,7 @@ RUN make install
 WORKDIR /OctoPrint-${VERSION}
 RUN pip install -r requirements.txt
 RUN python setup.py install
+RUN ln -s ~/.octoprint /data
 
 VOLUME /data
 WORKDIR /data

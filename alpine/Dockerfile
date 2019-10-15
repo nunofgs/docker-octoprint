@@ -34,6 +34,7 @@ COPY --from=build /mjpg-streamer-*/mjpg-streamer-experimental /opt/mjpg-streamer
 COPY --from=build /OctoPrint-* /opt/octoprint
 
 RUN apk --no-cache add build-base ffmpeg haproxy libjpeg openssh-client supervisor v4l-utils
+RUN ln -s ~/.octoprint /data
 
 VOLUME /data
 WORKDIR /data
