@@ -19,8 +19,10 @@ Now have a beer, you did it. 🍻
 
 # Tags
 
-- `1.3.11`, `1.3.11-debian`, `debian`, `latest` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/debian/Dockerfile))
-- `1.3.11-alpine`, `alpine` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/alpine/Dockerfile))
+- `1.3.12`, `1.3.12-debian`, `debian`, `latest` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/debian/Dockerfile))
+- `1.3.12-alpine`, `alpine` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/alpine/Dockerfile))
+- `1.3.11`, `1.3.11-debian` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/debian/Dockerfile))
+- `1.3.11-alpine` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/alpine/Dockerfile))
 - `1.3.10` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/debian/Dockerfile))
 - `1.3.9` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/debian/Dockerfile))
 - `1.3.8` ([Dockerfile](https://github.com/nunofgs/docker-octoprint/blob/master/debian/Dockerfile))
